@@ -3,7 +3,7 @@ const rateLimit = require('express-rate-limit')
 
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
-  max: 5,               // limit each IP
+  max: 10,               // limit each IP
   handler: (req, res) => {
     // Custom response
     res.status(429).json({
