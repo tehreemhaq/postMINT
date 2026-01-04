@@ -21,7 +21,8 @@ const postModel = require("./models/postModel")
 const likeModel = require('./models/likeModel');
 const { userIdentification } = require('./Midllewares/userIdentification');
 const { userAuth } = require('./Midllewares/authentication');
-const {limiter} = require('./Midllewares/rateLimiter')
+const {limiter} = require('./Midllewares/rateLimiter');
+
 
 
 // middlewares
@@ -65,7 +66,7 @@ app.use(limiter);
 
 
 // Database Connection
-mongoose.connect(process.env.MONGO_URL) 
+mongoose.connect( process.env.MONGO_URL) 
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
