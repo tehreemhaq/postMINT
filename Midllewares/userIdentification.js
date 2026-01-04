@@ -3,24 +3,6 @@ const userModel = require("../models/userModel");
 
 
 
-// async function userIdentification(req, res, next) {
-//     const token = req.cookies.token;
-//     if (token) {
-//         const decoded = jwt.verify(token, "heyyehheyyeh"); // security key  needs to be private later
-//         const user = await userModel.findById(decoded.id);
-
-//         if (!user) {
-//             return res.status(401).json({ message: "User not found" });
-//         }
-
-//         req.user = user; // attach user to req 
-        
-//     }
-//     next();
-// }
-
-
-
 async function userIdentification(req, res, next) {
     const token = req.cookies.token;
 
@@ -29,7 +11,7 @@ async function userIdentification(req, res, next) {
         return next();
     }else{
         try {
-        const decoded = jwt.verify(token, "heyyehheyyeh"); // move secret to env later
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY_USER); 
         const user = await userModel.findById(decoded.id);
 
         if (user) {

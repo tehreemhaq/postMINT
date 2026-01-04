@@ -12,8 +12,7 @@ const { adminAuth } = require('../Midllewares/authentication')
 
 
 if (process.env.NODE_ENV === "development") {
-    console.log("environment : development")
-    router.route('/register')
+      router.route('/register')
         .post(postRegisterAdmin)
 }
 else {

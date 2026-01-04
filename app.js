@@ -147,7 +147,7 @@ app.get('/about', async (req, res) => {
 })
 
 
-
+console.log("environment :" , process.env.NODE_ENV)
 
 
 

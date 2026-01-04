@@ -87,7 +87,7 @@ async function postLogInUser(req, res) {
     } else {
         bcrypt.compare(password, user.password, (err, result) => {
             if (result) {
-                jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY_USER , (err, token) => {   // for now security key is public we will make it secure later
+                jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY_USER , (err, token) => {   
                     if (err) {
                         console.error('Error signing token:', err);
                     } else {
