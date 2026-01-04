@@ -1,0 +1,44 @@
+<section id="posts" class="px-6 py-10 bg-white">
+  <div class="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
+    <% if (posts.length> 0) { %>
+      <% posts.forEach(post=> { %>
+        <div class="border border-[#2C7481]/30 rounded-lg p-4
+                    hover:shadow-md transition duration-200">
+
+          <h3 class="text-xl font-semibold text-[#2C7481]">
+            <%= post.title %>
+          </h3>
+
+          <p class="mt-2 text-sm text-zinc-700 line-clamp-3">
+            <%= post.content %>
+          </p>
+          <!-- like button and counts -->
+           <!-- first I used block approach with if else : like if post.isLiked render this block (with red color) else render block with zinc color but it was looking odd so asked gpt to help me out to make this better -->
+
+          <div class="mt-4 flex items-center gap-2 text-sm text-zinc-500">
+            <form action="/post/<%= post._id %>/like" method="POST">
+              <button type="submit">
+                <i class="fa-heart <%= post.isLiked ? 'fa-solid text-red-500' : 'fa-regular text-zinc-400' %>"></i>
+              </button>
+            </form>
+
+            
+            <span><%= post.likeCount %> likes</span>
+          </div>
+
+
+
+
+          <p class="mt-2 text-xs text-zinc-400">
+            Posted on <%= post.formattedDate %>
+          </p>
+
+        </div>
+        <% }) %>
+          <% } else { %>
+            <p class="text-zinc-500">No posts yet.</p>
+            <% } %>
+
+  </div>
+</section>

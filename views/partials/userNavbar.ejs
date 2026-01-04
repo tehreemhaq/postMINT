@@ -1,0 +1,85 @@
+
+
+
+<nav class="w-full bg-white border-b border-[#2C7481]/20">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+
+    <!-- Logo -->
+    <div class="text-[#2C7481] text-3xl font-bold font-exo select-none">
+      postMINT
+    </div>
+
+    <!-- Desktop links -->
+    <ul class="hidden md:flex items-center gap-8 text-[#2C7481] font-medium">
+      <li><a href="/home" class="hover:underline">Home</a></li>
+      <li><a href="/post/allPosts" class="hover:underline">Posts</a></li>
+      <li><a href="/about" class="hover:underline">About</a></li>
+    </ul>
+
+    <!-- Right actions (desktop) -->
+    <div class="hidden md:flex items-center gap-3">
+      <% if (user) { %>
+        <a href="/user/profile"
+           class="px-4 py-1.5 rounded-full border border-[#2C7481]
+                  text-[#2C7481] hover:bg-[#2C7481] hover:text-white transition">
+          Hi, <%= user.name %>
+        </a>
+      <% } else { %>
+        <a href="/user/login"
+           class="px-4 py-1.5 rounded-full border border-[#2C7481]
+                  text-[#2C7481] hover:bg-[#2C7481] hover:text-white transition">
+          Log in
+        </a>
+        <a href="/user/register"
+           class="px-4 py-1.5 rounded-full bg-[#2C7481] text-white
+                  hover:bg-[#245f69] transition">
+          Register
+        </a>
+      <% } %>
+    </div>
+
+    <!-- Mobile menu button -->
+    <button id="menuBtn"
+            class="md:hidden text-[#2C7481] text-2xl focus:outline-none">
+      ☰
+    </button>
+
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu"
+       class="hidden md:hidden border-t border-[#2C7481]/20 bg-white px-6 py-4 space-y-4">
+
+    <a href="/home" class="block text-[#2C7481] font-medium">Home</a>
+    <a href="/post/allPosts" class="block text-[#2C7481] font-medium">Posts</a>
+    <a href="/about" class="block text-[#2C7481] font-medium">About</a>
+
+    <div class="pt-4 border-t border-[#2C7481]/20">
+      <% if (user) { %>
+        <a href="/user/profile"
+           class="block text-[#2C7481] font-medium">
+          Profile
+        </a>
+      <% } else { %>
+        <a href="/user/login" class="block text-[#2C7481] font-medium">
+          Log in
+        </a>
+        <a href="/user/register"
+           class="block mt-2 text-[#2C7481] font-medium">
+          Register
+        </a>
+      <% } %>
+    </div>
+
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
+

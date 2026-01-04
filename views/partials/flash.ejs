@@ -1,0 +1,17 @@
+<% if (success && success.length) { %>
+  <div class="mb-4 rounded-md border border-green-300 bg-green-50 px-4 py-2 text-green-700">
+    <%= success[0] %>
+  </div>
+<% } %>
+
+<% if (error && error.length) { %>
+  <div class="mb-4 rounded-md border border-red-300 bg-red-50 px-4 py-2 text-red-700">
+    <%= error[0] %>
+  </div>
+<% } %>
+
+<% if (warning && warning.length) { %>
+  <div class="mb-4 rounded-md border border-yellow-300 bg-yellow-50 px-4 py-2 text-yellow-700">
+    <%= warning[0] %>
+  </div>
+<% } %>

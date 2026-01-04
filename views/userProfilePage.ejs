@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link href="/stylesheets/output.css" rel="stylesheet"> -->
+
+    <link href="/stylesheets/output.css" rel="stylesheet">
+
+</head>
+
+<body class="h-screen bg-[#fcfcfc]">
+   <!-- Profile Top Bar -->
+<!-- Profile Header -->
+<div class="border-b border-[#2C7481]/20 bg-white">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+
+        <!-- Back to Home (left) -->
+        <a href="/home"
+           class="text-[#2C7481] font-medium flex items-center gap-2
+                  hover:underline underline-offset-4">
+            ← Back to Home
+        </a>
+
+        <!-- Page Title -->
+        <h1 class="text-lg font-semibold text-[#2C7481] font-exo2">
+            Your Profile
+        </h1>
+
+        <!-- Logout (right) -->
+        <form action="/user/logout" method="POST">
+            <button type="submit"
+                    class="text-[#2C7481] font-medium
+                           hover:text-red-600 transition duration-200">
+                Log out
+            </button>
+        </form>
+
+    </div>
+</div>
+
+
+<!-- Profile Content -->
+<div class="max-w-5xl mx-auto px-6 py-8">
+
+    <!-- Greeting -->
+    <div class="mb-8">
+        <p class="text-2xl font-bold text-[#2C7481] font-exo2">
+            Hi, <%= user.name %>
+        </p>
+        <p class="text-[#2C7481]/80 mt-1">
+            Welcome to your personal profile
+        </p>
+    </div>
+
+    <!-- User Info Card -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-10">
+
+        <h2 class="text-xl font-semibold text-[#2C7481] mb-4">
+            Account Information
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-[#2C7481]">
+
+            <div>
+                <p class="text-sm opacity-70">Name</p>
+                <p class="font-medium"><%= user.name %></p>
+            </div>
+
+            <div>
+                <p class="text-sm opacity-70">Email</p>
+                <p class="font-medium"><%= user.email %></p>
+            </div>
+
+            <% if (user.username) { %>
+            <div>
+                <p class="text-sm opacity-70">Username</p>
+                <p class="font-medium"><%= user.username %></p>
+            </div>
+            <% } %>
+
+            <div>
+                <p class="text-sm opacity-70">Member since</p>
+                <p class="font-medium">
+                    <%= user.createdAt
+                        ? user.createdAt.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long'
+                          })
+                        : '—'
+                    %>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Liked Posts Placeholder -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+
+        <h2 class="text-xl font-semibold text-[#2C7481] mb-2">
+            Liked Posts
+        </h2>
+
+
+         <div class="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
+    <% if (likedPosts.length> 0) { %>
+      <% likedPosts.forEach(post=> { %>
+        <div class="border border-[#2C7481]/30 rounded-lg p-4
+                    hover:shadow-md transition duration-200">
+
+          <h3 class="text-xl font-semibold text-[#2C7481]">
+            <%= post.title %>
+          </h3>
+
+          <p class="mt-2 text-sm text-zinc-700 line-clamp-3">
+            <%= post.content %>
+          </p>
+          <!-- like button and counts -->
+           <!-- first I used block approach with if else : like if post.isLiked render this block (with red color) else render block with zinc color but it was looking odd so asked gpt to help me out to make this better -->
+
+          <div class="mt-4 flex items-center gap-2 text-sm text-zinc-500">
+            <form action="/post/<%= post._id %>/like" method="POST">
+              <button type="submit">
+                <i class="fa-heart  fa-solid text-red-500  %>"></i>
+              </button>
+            </form>
+
+            
+            <span><%= post.likeCount %> likes</span>
+          </div>
+
+
+
+
+          <p class="mt-2 text-xs text-zinc-400">
+            Posted on <%= post.formattedDate %>
+          </p>
+
+        </div>
+        <% }) %>
+          <% } else { %>
+            <p class="text-zinc-500">No posts yet.</p>
+            <% } %>
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+</body>
+
+</html>
