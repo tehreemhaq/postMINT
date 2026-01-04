@@ -66,52 +66,15 @@ app.use(limiter);
 
 
 
-// Database Connection
-// mongoose.connect( process.env.MONGO_URL) 
-//   .then(() => console.log('Connected to MongoDB')
 
-  
-//     async function createAdmin() {
-//       const exists = await adminModel.findOne({ email: "admin@example.com" });
-//       if (!exists) {
-//         const hashedPassword = await bcrypt.hash("yourpassword", 12);
-//         await adminModel.create({
-//           name: "Admin",
-//           email: "admin@example.com",
-//           password: hashedPassword
-//         });
-//         console.log("Admin created in cloud DB");
-//       } else {
-//         console.log("Admin already exists");
-//       }
-//     }
 
-//     createAdmin();
 
-// )
-//   .catch(err => console.error('MongoDB connection error:', err));
-
-// --- Mongo connection ---
-async function createAdmin() {
-  const exists = await adminModel.findOne({ email: "www.fatimatehreem@gmail.com" });
-  if (!exists) {
-    const hashedPassword = await bcrypt.hash("projectPossible@44", 12);
-    await adminModel.create({
-      name: "Tehreem Fatima",
-      email: "www.fatimatehreem@gmail.com",
-      password: hashedPassword
-    });
-    console.log("Admin created in cloud DB");
-  } else {
-    console.log("Admin already exists");
-  }
-}
 
 
 mongoose.connect(process.env.MONGO_URL)
   .then(() => {
     console.log("MongoDB connected");
-    createAdmin(); // call the function here
+    // createAdmin(); // call the function here
   })
   .catch(err => console.error("Mongo error:", err));
 
