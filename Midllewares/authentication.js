@@ -15,7 +15,7 @@ async function adminAuth(req, res, next) {
       return res.redirect('/admin/login')
     }
 
-    const decoded = jwt.verify(token, process.env.ADMIN_JWT_SECRET || 'mtfmtf');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY_ADMIN);
 
     const admin = await adminModel.findById(decoded.id);
     if (!admin) {
@@ -42,7 +42,7 @@ async function userAuth(req, res, next) {
       return res.redirect('/user/login')
     }
 
-    const decoded = jwt.verify(token, process.env.USER_JWT_SECRET || 'heyyehheyyeh');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY_USER);
 
     const user = await userModel.findById(decoded.id);
     if (!user) {
