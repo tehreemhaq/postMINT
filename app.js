@@ -8,7 +8,6 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose')
 const session = require('express-session')
 const flash = require('connect-flash')
-const rateLimit = require('express-rate-limit');
 const app = express()
 const port = process.env.PORT || 8000
 
@@ -20,7 +19,6 @@ const postRoutes = require('./routes/postRoutes')
 const postModel = require("./models/postModel")
 const likeModel = require('./models/likeModel');
 const { userIdentification } = require('./Midllewares/userIdentification');
-const { userAuth } = require('./Midllewares/authentication');
 const {limiter} = require('./Midllewares/rateLimiter');
 
 
@@ -148,7 +146,7 @@ app.get('/about', async (req, res) => {
 })
 
 
-console.log("environment :" , process.env.NODE_ENV)
+
 
 
 

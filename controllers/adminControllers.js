@@ -80,7 +80,7 @@ async function postLogIn(req, res) {
                     if (err) {
                         console.error('Error signing token:', err);
                     } else {
-                        console.log(token)
+                      
                         res.cookie("token", token, {
                             httpOnly: true,           //  JS cannot access it → prevents XSS from stealing token
                             secure: false,             //  ture in production HTTPS
