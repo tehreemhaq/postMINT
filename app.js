@@ -17,6 +17,7 @@ const port = process.env.PORT || 8000
 const userRoutes = require('./routes/userRoutes')
 const adminRoutes = require('./routes/adminRoutes')
 const postRoutes = require('./routes/postRoutes')
+const adminModel = require('./models/adminModel')
 const postModel = require("./models/postModel")
 const likeModel = require('./models/likeModel');
 const { userIdentification } = require('./Midllewares/userIdentification');
@@ -91,30 +92,29 @@ app.use(limiter);
 //   .catch(err => console.error('MongoDB connection error:', err));
 
 // --- Mongo connection ---
+async function createAdmin() {
+  const exists = await adminModel.findOne({ email: "www.fatimatehreem@gmail.com" });
+  if (!exists) {
+    const hashedPassword = await bcrypt.hash("projectPossible@44", 12);
+    await adminModel.create({
+      name: "Tehreem Fatima",
+      email: "www.fatimatehreem@gmail.com",
+      password: hashedPassword
+    });
+    console.log("Admin created in cloud DB");
+  } else {
+    console.log("Admin already exists");
+  }
+}
+
+
 mongoose.connect(process.env.MONGO_URL)
   .then(() => {
     console.log("MongoDB connected");
-
-
-    async function createAdmin() {
-      const exists = await adminModel.findOne({ email: "www.fatimatehreem@gmail.com" });
-      if (!exists) {
-        const hashedPassword = await bcrypt.hash("projectPossible@44", 12);
-        await adminModel.create({
-          name: "Tehreem Fatima",
-          email: "www.fatimatehreem@gmail.com",
-          password: hashedPassword
-        });
-        console.log("Admin created in cloud DB");
-      } else {
-        console.log("Admin already exists");
-      }
-    }
-
-    createAdmin();
-
+    createAdmin(); // call the function here
   })
   .catch(err => console.error("Mongo error:", err));
+
 
 
 
